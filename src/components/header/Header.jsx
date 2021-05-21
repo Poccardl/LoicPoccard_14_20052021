@@ -9,7 +9,7 @@ function Header() {
                 <h1>HRnet</h1>
             </Link>
             <nav>
-                <Link to="">View Current Employees</Link>
+                <Link to="/employee-list">View Current Employees</Link>
             </nav>
         </div>
         </>

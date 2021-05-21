@@ -3,5 +3,7 @@
 @import './base/typography';
 @import './abstracts/variables';
 @import '../components/banner/banner';
+@import '../components//current_employees_tab/current_employess_tab';
 @import '../components/header/header';
 @import '../forms/create_employee/create_employee_form';
+@import '../views/current_employees/current_employees';

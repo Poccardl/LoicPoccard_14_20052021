@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
-
+import { connect } from 'react-redux'
+import { employeeSelector } from '../../selectors/employeeSelector.js'
+import { add_employee } from '../../actions/employeeActions.js'
 import { state_options, department_options } from '../../constants/formConstants.js'
 
-function CreateEmployeeForm() {
+function CreateEmployeeForm({add_employee}) {
 
+    const [isModal, setIsModal] = useState(false)
     const [firstName, setFirstName] = useState(String)
     const [lastName, setLastName] = useState(String)
     const [birthDate, setBirthDate] = useState(String)
     const [startDate, setStartDate] = useState(String)
-
     const [street, setStreet] = useState(String)
     const [city, setCity] = useState(String)
     const [state, setState] = useState(String)
@@ -30,7 +32,20 @@ function CreateEmployeeForm() {
             department: department
         }
         e.preventDefault()
-        console.log("form_result ->", form_result)
+        if (formIsValid(form_result)) {
+            add_employee(form_result)
+            setIsModal(true)
+        }
+    }
+
+    const formIsValid = (form_result) => {
+        let is_valid = true
+        for (let property in form_result) {
+            if (form_result[property] === "") {
+                is_valid = false
+            }
+        }
+        return is_valid
     }
 
     return (
@@ -86,4 +101,6 @@ function CreateEmployeeForm() {
     )
 }
 
-export default CreateEmployeeForm
+const CreateEmployeeFormStore = connect(employeeSelector, {add_employee})(CreateEmployeeForm)
+
+export default CreateEmployeeFormStore

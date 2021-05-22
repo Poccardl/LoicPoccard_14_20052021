@@ -8,15 +8,22 @@ import { state_options, department_options } from '../../constants/formConstants
 function CreateEmployeeForm({add_employee}) {
 
     const [isModal, setIsModal] = useState(false)
+    const [firstNameIsValid, setFirstNameIsValid] = useState(String)
+    const [lastNameIsValid, setLastNameIsValid] = useState(String)
+    const [birthDateIsValid, setBirthDateIsValid] = useState(String)
+    const [startDateIsValid, setStartDateIsValid] = useState(String)
+    const [streetIsValid, setStreetIsValid] = useState(String)
+    const [cityIsValid, setCityIsValid] = useState(String)
+    const [zipCodeIsValid, setZipCodeIsValid] = useState(String)
     const [firstName, setFirstName] = useState(String)
     const [lastName, setLastName] = useState(String)
     const [birthDate, setBirthDate] = useState(String)
     const [startDate, setStartDate] = useState(String)
     const [street, setStreet] = useState(String)
     const [city, setCity] = useState(String)
-    const [state, setState] = useState(String)
+    const [state, setState] = useState('Alabama')
     const [zipCode, setZipCode] = useState(String)
-    const [department, setDepartment] = useState(String)
+    const [department, setDepartment] = useState('Sales')
 
     const handleSubmit = (e) => {
         console.log("evt", e)
@@ -32,17 +39,73 @@ function CreateEmployeeForm({add_employee}) {
             department: department
         }
         e.preventDefault()
-        if (formIsValid(form_result)) {
+        if (formValidation(form_result)) {
             add_employee(form_result)
             setIsModal(true)
         }
     }
 
-    const formIsValid = (form_result) => {
+    const formValidation = (form_result) => {
         let is_valid = true
+        const regex_zipCode = new RegExp(/^[0-9]{5}(?:-[0-9]{4})?$/)
+        if (regex_zipCode.test(form_result["zipCode"]) === false) {
+            is_valid = false
+            setZipCodeIsValid("notValid")
+        } else {
+            setZipCodeIsValid("")
+        }
         for (let property in form_result) {
             if (form_result[property] === "") {
                 is_valid = false
+                switch(property) {
+                    case "firstName":
+                        setFirstNameIsValid("notValid")
+                        break
+                    case "lastName":
+                        setLastNameIsValid("notValid")
+                        break
+                    case "birthDate":
+                        setBirthDateIsValid("notValid")
+                        break
+                    case "startDate":
+                        setStartDateIsValid("notValid")
+                        break
+                    case "street":
+                        setStreetIsValid("notValid")
+                        break
+                    case "city":
+                        setCityIsValid("notValid")
+                        break
+                    case "zipCOde":
+                        setZipCodeIsValid("notValid")
+                        break
+                    default:
+                }
+            } else {
+                switch(property) {
+                    case "firstName":
+                        setFirstNameIsValid("")
+                        break
+                    case "lastName":
+                        setLastNameIsValid("")
+                        break
+                    case "birthDate":
+                        setBirthDateIsValid("")
+                        break
+                    case "startDate":
+                        setStartDateIsValid("")
+                        break
+                    case "street":
+                        setStreetIsValid("")
+                        break
+                    case "city":
+                        setCityIsValid("")
+                        break
+                    case "zipCOde":
+                        setZipCodeIsValid("")
+                        break
+                    default:
+                }
             }
         }
         return is_valid
@@ -55,30 +118,28 @@ function CreateEmployeeForm({add_employee}) {
             <form onSubmit={handleSubmit}>
                 <div className="form_element">
                     <label htmlFor="">FirstName</label>
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                    <input className={firstNameIsValid} type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
                 </div>
                 <div className="form_element">
                     <label htmlFor="">LastName</label>
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                    <input className={lastNameIsValid} type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                 </div>
                 <div className="form_element">
                     <label htmlFor="">Date of Birth</label>
-                    <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
+                    <input className={birthDateIsValid} type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
                 </div>
                 <div className="form_element">
                     <label htmlFor="">Start Date</label>
-                    <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                    <input className={startDateIsValid} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
                 </div>
-
                 <p>Adress</p>
-
                 <div className="form_element">
                     <label htmlFor="">Street</label>
-                    <input type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
+                    <input className={streetIsValid} type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
                 </div>
                 <div className="form_element">
                     <label htmlFor="">City</label>
-                    <input type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
+                    <input className={cityIsValid} type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
                 </div>
                 <div className="form_element">
                     <label htmlFor="">State</label>
@@ -86,14 +147,12 @@ function CreateEmployeeForm({add_employee}) {
                 </div>
                 <div className="form_element">
                     <label htmlFor="">Zip code</label>
-                    <input type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)}/>
+                    <input className={zipCodeIsValid} type="text" value={zipCode} onChange={(e) => setZipCode(e.target.value)}/>
                 </div>
-
                 <div className="form_element">
                     <label htmlFor="">Department</label>
                     <Select defaultValue={department_options[0]} options={department_options} onChange={(e) => setDepartment(e.value)}/>
                 </div>
-
                 <button className="save_button" type="submit">Sign In</button>
             </form>
         </div>

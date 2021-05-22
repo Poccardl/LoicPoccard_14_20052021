@@ -38,6 +38,10 @@
             background-color: $color-primary;
             color: #fff;
             cursor: pointer;
-          }
+        }
+        .notValid {
+            border-color: red;
+            border-radius: 5px;
+        }
     }
 }

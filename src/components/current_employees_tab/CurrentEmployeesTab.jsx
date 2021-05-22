@@ -31,7 +31,7 @@ function CurrentEmployeesTab() {
     return (
         <>
         <div className="current_employees_tab">
-            <DataGrid rows={rows} columns={columns} pageSize={5} />
+            <DataGrid rows={rows} columns={columns} pageSize={100} />
         </div>
         </>
     )

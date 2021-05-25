@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { employeeSelector } from '../../selectors/employeeSelector.js'
 import { add_employee } from '../../actions/employeeActions.js'
 import { state_options, department_options } from '../../constants/formConstants.js'
+import { WhModal } from 'wh-modal'
 
 function CreateEmployeeForm({add_employee}) {
 
@@ -26,7 +27,6 @@ function CreateEmployeeForm({add_employee}) {
     const [department, setDepartment] = useState('Sales')
 
     const handleSubmit = (e) => {
-        console.log("evt", e)
         const form_result = {
             firstName: firstName,
             lastName: lastName,
@@ -111,8 +111,16 @@ function CreateEmployeeForm({add_employee}) {
         return is_valid
     }
 
+    const closeModal = () => {
+        setIsModal(false)
+    }
+
     return (
         <>
+        {isModal ?
+        <div className="blocker" onClick={closeModal}>
+            <WhModal isModal={"true"} content={"Employee Created!"} modalStyle={{backgroundColor: "#708622"}}/>
+        </div> : ""}
         <div className="create_employee_form">
             <h2>Create Employee</h2>
             <form onSubmit={handleSubmit}>

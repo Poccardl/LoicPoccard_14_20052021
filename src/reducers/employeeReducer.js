@@ -14,7 +14,6 @@ const employees = {
     arr: []
 }
 
-
 const EmployeeReducer = (state = employees, action) => {
     switch(action.type) {
         case INIT:

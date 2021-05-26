@@ -30,6 +30,13 @@ function CreateEmployeeForm({add_employee}) {
     const [birthDateValue, setBirthDateValue] = useState(String)
     const [startDateValue, setStartDateValue] = useState(String)
 
+    /**
+     * Get the data from the form stored in the state locale,
+     * check if the form is valid -> formValidation(),
+     * if the form is valid add a new employee to the global state of the application -> add_employee()
+     * @date 2021-05-26
+     * @param {object} e - 'onSubmit' event type
+     */
     const handleSubmit = (e) => {
         const form_result = {
             firstName: firstName,
@@ -49,6 +56,12 @@ function CreateEmployeeForm({add_employee}) {
         }
     }
 
+    /**
+     * Checks if the different fields of the form are valid
+     * @date 2021-05-26
+     * @param {object} form_result - result of the employee creation form
+     * @returns {boolean} is_valid - returns true if the form is valid and false if the form is not valid
+     */
     const formValidation = (form_result) => {
         let is_valid = true
         const regex_zipCode = new RegExp(/^[0-9]{5}(?:-[0-9]{4})?$/)
@@ -115,10 +128,20 @@ function CreateEmployeeForm({add_employee}) {
         return is_valid
     }
 
+    /**
+     * Close modal
+     * @date 2021-05-26
+     */
     const closeModal = () => {
         setIsModal(false)
     }
 
+    /**
+     * Parse the date into a string with a specific format
+     * @date 2021-05-26
+     * @param {object} date - date from the employee creation form
+     * @param {string} option - option to know which properties of the local state are assigned the values
+     */
     const parseDateValue = (date, option) => {
         const regex_date = new RegExp(/(^..........)/)
         const date_parsed = date.toISOString().match(regex_date)[0]

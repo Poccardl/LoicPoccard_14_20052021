@@ -5,6 +5,11 @@ import { store } from '../../app/store.js'
 
 function CurrentEmployeesTab() {
 
+    /**
+     * Adds an id to each employee to be able to use the DataGrid component
+     * @date 2021-05-26
+     * @returns {object} rows - list of employees
+     */
     const addIdToEmployee = () => {
         const rows = []
         let tab = store.getState().employees.arr

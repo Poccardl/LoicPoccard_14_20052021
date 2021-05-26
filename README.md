@@ -10,8 +10,8 @@ A backend using [Node.js](https://nodejs.org/en/) is provided to allow HTPP call
 ## 2. Getting Started
 
 ### 2.2 Installation
-* Clone this repository on your computer `git clone https://github.com/Poccardl/LoicPoccard_13_22042021.git`
-* Go to the project folder `cd LoicPoccard_13_22042021`
+* Clone this repository on your computer `git clone https://github.com/Poccardl/LoicPoccard_14_20052021.git`
+* Go to the project folder `cd LoicPoccard_14_20052021.git`
 * Install all dependencies of you need for run this project `npm install`
 
 ### 2.3 Run the project

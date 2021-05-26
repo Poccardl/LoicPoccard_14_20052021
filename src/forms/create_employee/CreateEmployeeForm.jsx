@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 import { connect } from 'react-redux'
 import { employeeSelector } from '../../selectors/employeeSelector.js'
 import { add_employee } from '../../actions/employeeActions.js'
@@ -25,13 +27,15 @@ function CreateEmployeeForm({add_employee}) {
     const [state, setState] = useState('Alabama')
     const [zipCode, setZipCode] = useState(String)
     const [department, setDepartment] = useState('Sales')
+    const [birthDateValue, setBirthDateValue] = useState(String)
+    const [startDateValue, setStartDateValue] = useState(String)
 
     const handleSubmit = (e) => {
         const form_result = {
             firstName: firstName,
             lastName: lastName,
-            birthDate: birthDate,
-            startDate: startDate,
+            birthDate: birthDateValue,
+            startDate: startDateValue,
             street: street,
             city: city,
             state: state,
@@ -115,6 +119,18 @@ function CreateEmployeeForm({add_employee}) {
         setIsModal(false)
     }
 
+    const parseDateValue = (date, option) => {
+        const regex_date = new RegExp(/(^..........)/)
+        const date_parsed = date.toISOString().match(regex_date)[0]
+        if (option === "birthDate") {
+            setBirthDateValue(date_parsed)
+            setBirthDate(date)
+        } else if (option === "startDate") {
+            setStartDateValue(date_parsed)
+            setStartDate(date)
+        }
+    }
+
     return (
         <>
         {isModal ?
@@ -134,11 +150,11 @@ function CreateEmployeeForm({add_employee}) {
                 </div>
                 <div className="form_element">
                     <label htmlFor="">Date of Birth</label>
-                    <input className={birthDateIsValid} type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
+                    <DatePicker className={birthDateIsValid} selected={birthDate} placeholderText=" jj / mm / aaaa" dateFormat="dd/MM/yyyy" onChange={date => parseDateValue(date, "birthDate")} />
                 </div>
                 <div className="form_element">
                     <label htmlFor="">Start Date</label>
-                    <input className={startDateIsValid} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                    <DatePicker className={startDateIsValid} selected={startDate} placeholderText=" jj / mm / aaaa" dateFormat="dd/MM/yyyy" onChange={date => parseDateValue(date, "startDate")} />
                 </div>
                 <p>Adress</p>
                 <div className="form_element">

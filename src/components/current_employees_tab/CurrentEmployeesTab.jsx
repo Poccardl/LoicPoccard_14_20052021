@@ -16,14 +16,14 @@ function CurrentEmployeesTab() {
     }
 
     const columns = [
-        { field: 'firstName', headerName: 'First name', width: 150 },
-        { field: 'lastName', headerName: 'Last name', width: 150 },
-        { field: 'startDate', headerName: 'Start Date', width: 110},
-        { field: 'department', headerName: 'Department', width: 150 },
-        { field: 'street', headerName: 'Street', width: 150 },
-        { field: 'city', headerName: 'City', width: 150 },
-        { field: 'state', headerName: 'State', width: 150 },
-        { field: 'zipCode', headerName: 'Zip Code', width: 150 }
+        { field: 'firstName', headerName: 'First name', width: 175 },
+        { field: 'lastName', headerName: 'Last name', width: 175 },
+        { field: 'startDate', headerName: 'Start Date', width: 175},
+        { field: 'department', headerName: 'Department', width: 175 },
+        { field: 'street', headerName: 'Street', width: 175 },
+        { field: 'city', headerName: 'City', width: 175 },
+        { field: 'state', headerName: 'State', width: 175 },
+        { field: 'zipCode', headerName: 'Zip Code', width: 175 }
       ]
 
     const rows = addIdToEmployee()
